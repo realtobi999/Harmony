@@ -30,9 +30,9 @@ class SpotifyTrackController extends ApiController
         return $this->processRequest(function ($userData) use ($request) {
 
             $queryParams = [
-                'market' => $request->market ?? 'ES',
                 'limit' => $request->limit,
-                'offset' => $request->offset
+                'offset' => $request->offset,
+                'market' => $request->market ?? 'ES',
             ];
 
             return Spotify::makeGetRequest('getSavedTracksUrl', $queryParams, $userData['access_token']);

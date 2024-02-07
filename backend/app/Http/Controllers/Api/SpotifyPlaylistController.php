@@ -17,8 +17,8 @@ class SpotifyPlaylistController extends ApiController
         return $this->processRequest(function ($userData) use($request, $playlistId) {
 
             $params = [
-                'market' => $request->market ?? 'ES',
                 'playlist_id' => $playlistId,
+                'market' => $request->market ?? 'ES',
                 'fields' => $request->fields ?? 'images(url),uri,name,id,owner(display_name,id),tracks(items(added_at,track(name,id,album(name,id,images(url),artists(name)))))',
             ];
     
