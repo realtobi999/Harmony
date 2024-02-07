@@ -46,9 +46,7 @@
 </template>
 
 <script setup>
-import InputField from '@/components/InputField.vue'
-import router from '@/router'
-import { reactive, ref } from 'vue'
+import { reactive} from 'vue'
 import { RouterLink } from 'vue-router'
 
 const form = reactive({
@@ -91,7 +89,8 @@ const submitForm = async () => {
     }
 
     const data = await response.json()
-    localStorage.setItem('harmony_token', data.harmony_token)
+
+    document.cookie = "harmony_token=" + data.harmony_token + "; expires=" + new Date(new Date().getTime() + 3600000).toUTCString() + "; Secure; SameSite=None";
     localStorage.setItem('user_id', data.user_id)
     
     await SpotifyAuthLogin()

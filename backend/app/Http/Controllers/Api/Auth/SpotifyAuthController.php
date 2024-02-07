@@ -111,4 +111,20 @@ class SpotifyAuthController extends ApiController
             ], 500);
         }
     }
+
+    public function verifyToken(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $userId = $request->userId;
+        $harmony_token = $request->token;
+
+        try{
+            User::findOrFail($userId)->where('harmony_token', $harmony_token)->firstOrFail();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Token verified successfully.',
+            ], 200);
+        } catch (\Exception $e) {
+            return $this->errorResponse('Invalid Token', 401);
+        }
+    }
 }

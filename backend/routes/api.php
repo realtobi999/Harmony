@@ -82,6 +82,9 @@ Route::get('/login', function () {
     ], 401);
 });
 
-Route::get('/auth/spotify/redirect', [SpotifyAuthController::class, 'redirect']);
-Route::get('/auth/callback', [SpotifyAuthController::class, 'callback']);
-Route::post('/auth/store-tokens', [SpotifyAuthController::class, 'storeTokensIntoUserTable']);
+Route::prefix('/auth')->group(function () {
+    Route::get('/spotify/redirect', [SpotifyAuthController::class, 'redirect']);
+    Route::get('/callback', [SpotifyAuthController::class, 'callback']);
+    Route::post('/store-tokens', [SpotifyAuthController::class, 'storeTokensIntoUserTable']);
+    Route::get('/verify-token', [SpotifyAuthController::class, 'verifyToken']);
+});
